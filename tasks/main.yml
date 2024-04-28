@@ -1,0 +1,14 @@
+---
+
+- name: Add repository for Google Cloud
+  become: true
+  ansible.builtin.template:
+    src: google-cloud-sdk.repo.j2
+    dest: '{{ google_cloud_repo_file }}'
+
+- name: Install Google Cloud packages
+  become: true
+  dnf:
+    name: '{{ google_cloud_packages }}'
+    state: present
+    update_cache: yes
